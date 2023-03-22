@@ -1,6 +1,6 @@
 from os import listdir
 from aiohttp.web import Response, run_app, Application, RouteTableDef, Request
-from plugins.binderr import Binder
+from plugins.binder import Binder
 
 routes = RouteTableDef()
 app = Application()
@@ -26,7 +26,7 @@ async def main_handler(request: Request):
 
 
 @routes.get('/styles')
-async def css_handler(request: request):
+async def css_handler(request: Request):
     data = await binder.get_css(str(request.url).split('?')[1])
     return Response(
         body=data['body'],
@@ -45,4 +45,4 @@ async def file_get_handler(request: Request):
     )
 
 if __name__ == '__main__':
-    run_app(app, host='192.168.100.4', port='80')
+    run_app(app, host='localhost', port='80')

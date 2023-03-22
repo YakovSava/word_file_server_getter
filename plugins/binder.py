@@ -42,17 +42,17 @@ class Binder:
         return data
 
     async def get_html(self, html_name: str) -> dict:
-        try:
-            async with aiopen(join(self._html, unquote(filename)), 'r', encoding='utf-8') as file:
-                data = {
-                    'content_type': 'text/html',
-                    'body': await file.read(),
-                    'status': 200
-                }
-        except:
+        # try:
+        async with aiopen(join(self._html, unquote(filename)), 'r', encoding='utf-8') as file:
             data = {
-                'content_type': 'text/plain',
-                'body': '',
-                'status': 404
+                'content_type': 'text/html',
+                'body': await file.read(),
+                'status': 200
             }
+        # except:
+            # data = {
+            #     'content_type': 'text/plain',
+            #     'body': '',
+            #     'status': 404
+            # }
         return data
